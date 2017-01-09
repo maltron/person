@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.bson.Document;
 
 @XmlRootElement(name="person")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -26,6 +27,12 @@ public class Person implements Serializable {
     private String email;
 
     public Person() {
+    }
+    
+    public Person(Document document) {
+        this.firstName = document.getString("firstName");
+        this.lastName = document.getString("lastName");
+        this.email = document.getString("email");
     }
 
     public Person(String firstName, String lastName, String email) {
