@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
 @XmlRootElement(name="person")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -30,6 +31,8 @@ public class Person implements Serializable {
     }
     
     public Person(Document document) {
+        ObjectId objectID = document.getObjectId("_id");
+        this.ID = objectID.toString();
         this.firstName = document.getString("firstName");
         this.lastName = document.getString("lastName");
         this.email = document.getString("email");
