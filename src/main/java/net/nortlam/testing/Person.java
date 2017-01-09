@@ -15,7 +15,7 @@ import org.bson.types.ObjectId;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Person implements Serializable {
     
-    @XmlElement(name="_id", type=String.class, required=true, nillable = false)
+    @XmlElement(name="_id", type=String.class)
     private String ID;
     
     @XmlElement(name="firstName", type=String.class, required=true)
@@ -116,11 +116,11 @@ public class Person implements Serializable {
     @Override
     public String toString() {
         JsonObjectBuilder builder = Json.createObjectBuilder();
-        builder.add("_id", this.ID)
-        .add("firstName", this.firstName != null ? this.firstName : "NULL")
-        .add("lastName", this.lastName != null ? this.lastName : "NULL")
-        .add("email", this.email != null ? this.email : "NULL");
+        if(this.ID != null) builder.add("_id", this.ID);
+        if(this.firstName != null) builder.add("firstName", this.firstName);
+        if(this.lastName != null) builder.add("lastName", this.lastName);
+        if(this.email != null) builder.add("email", this.email);
         
-        return builder.toString();
+        return builder.build().toString();
     }
 }

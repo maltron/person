@@ -35,10 +35,10 @@ public class Resource implements Serializable {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response create(String person) {
+    public Response create(Person person) {
         LOG.log(Level.INFO, ">>> create():{0}", person != null ? person.toString() : "NULL");
         
-//        ObjectId objectId = service.create(person);
+        ObjectId objectId = service.create(person);
         
         return Response.ok().build();
     }

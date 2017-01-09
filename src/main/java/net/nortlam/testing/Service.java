@@ -37,7 +37,8 @@ public class Service {
         MongoCollection<Document> collection = getDatabase().getCollection(MongoProvider.COLLECTION);
         Document document = null;
         try {
-            document = (Document)JSON.parse(person.toString());
+//            document = (Document)JSON.parse(person.toString());
+            document = Document.parse(person.toString());
             collection.insertOne(document);
             
         } catch(JSONParseException ex) {
