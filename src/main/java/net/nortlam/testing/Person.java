@@ -15,16 +15,16 @@ import org.bson.types.ObjectId;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Person implements Serializable {
     
-    @XmlElement(name="_id", type=String.class)
+    @XmlElement(name="_id", type=String.class, required=false, nillable = true)
     private String ID;
     
-    @XmlElement(name="firstName", type=String.class, required=true)
+    @XmlElement(name="firstName", type=String.class, required=true, nillable = false)
     private String firstName;
     
-    @XmlElement(name="lastName", type=String.class, required=true)
+    @XmlElement(name="lastName", type=String.class, required=true, nillable = false)
     private String lastName;
     
-    @XmlElement(name="email", type=String.class, required=true)
+    @XmlElement(name="email", type=String.class, required=true, nillable = false)
     private String email;
 
     public Person() {
@@ -42,6 +42,10 @@ public class Person implements Serializable {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+    }
+    
+    public boolean isValid() {
+        return getFirstName() != null && getLastName() != null && getEmail() != null;
     }
 
     public String getID() {

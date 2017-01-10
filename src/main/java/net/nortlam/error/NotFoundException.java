@@ -1,4 +1,4 @@
-package net.nortlam.testing;
+package net.nortlam.error;
 
 public class NotFoundException extends Exception {
 
