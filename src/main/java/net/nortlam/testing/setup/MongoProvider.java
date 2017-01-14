@@ -44,24 +44,26 @@ public class MongoProvider {
             
             if(!alreadyExists) {
                 LOG.log(Level.INFO, ">>> Creating Indexes for the First Time");
-                collection.createIndex(Indexes.ascending("email"), new IndexOptions().unique(true));
+                IndexOptions indexOptions = new IndexOptions();
+                indexOptions.name("index-email").unique(true).sparse(true);
+                collection.createIndex(Indexes.ascending("email"), indexOptions);
             }
             
-            try {
-                Document document = new Document("email", "maltron")
-                        .append("firstName", "Mauricio").append("lastName", "Leal");
-                LOG.log(Level.INFO, ">>> Inserting #1:{0}", document);
-                collection.insertOne(document);
-                LOG.log(Level.INFO, ">>> Inserting #2:{0}", document);
-                collection.insertOne(document);
-                
-            } catch(MongoWriteException ex) {
-                LOG.log(Level.SEVERE, "### MONGO WRITE EXCEPTION:{0}", ex.getMessage());
-            } catch(MongoWriteConcernException ex) {
-                LOG.log(Level.SEVERE, "### MONGO WRITE CONCERN EXCEPTION:{0}", ex.getMessage());
-            } catch(MongoException ex) {
-                LOG.log(Level.SEVERE, "### MONGO EXCEPTION:{0}", ex.getMessage());
-            }
+//            try {
+//                Document document = new Document("email", "maltron")
+//                        .append("firstName", "Mauricio").append("lastName", "Leal");
+//                LOG.log(Level.INFO, ">>> Inserting #1:{0}", document);
+//                collection.insertOne(document);
+//                LOG.log(Level.INFO, ">>> Inserting #2:{0}", document);
+//                collection.insertOne(document);
+//                
+//            } catch(MongoWriteException ex) {
+//                LOG.log(Level.SEVERE, "### MONGO WRITE EXCEPTION:{0}", ex.getMessage());
+//            } catch(MongoWriteConcernException ex) {
+//                LOG.log(Level.SEVERE, "### MONGO WRITE CONCERN EXCEPTION:{0}", ex.getMessage());
+//            } catch(MongoException ex) {
+//                LOG.log(Level.SEVERE, "### MONGO EXCEPTION:{0}", ex.getMessage());
+//            }
             
                 
             LOG.log(Level.INFO, ">>> Number of Documents:{0}", collection.count());

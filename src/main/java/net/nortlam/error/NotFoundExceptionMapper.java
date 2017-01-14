@@ -1,4 +1,4 @@
-package net.nortlam.testing;
+package net.nortlam.error;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;

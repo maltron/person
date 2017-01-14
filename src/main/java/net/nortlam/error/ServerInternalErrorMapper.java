@@ -1,4 +1,4 @@
-package net.nortlam.testing;
+package net.nortlam.error;
 
 import java.util.logging.Logger;
 import javax.ws.rs.core.Response;
