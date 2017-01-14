@@ -1,6 +1,7 @@
 package net.nortlam.testing.setup;
 
 import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
 import com.mongodb.MongoException;
 import com.mongodb.MongoWriteConcernException;
 import com.mongodb.MongoWriteException;
@@ -30,7 +31,8 @@ public class MongoProvider {
     @PostConstruct
     private void init() {
         LOG.log(Level.INFO, ">>> init() CONNECTING TO MONGO");
-        client = new MongoClient("localhost", 27017);
+//        client = new MongoClient("second-data", 27017);
+        client = new MongoClient(new MongoClientURI("mongodb://mauricio:maltron@microservice-data:27017/sampledb"));
         
         try {
             MongoCollection<Document> collection = client.getDatabase(DATABASE).getCollection(COLLECTION);
