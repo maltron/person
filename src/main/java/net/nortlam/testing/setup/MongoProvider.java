@@ -31,8 +31,14 @@ public class MongoProvider {
     @PostConstruct
     private void init() {
         LOG.log(Level.INFO, ">>> init() CONNECTING TO MONGO");
+        String connectionString = String.format("mongodb://%s:%s@%s:27017/%s", 
+                System.getenv("DB_USERNAME"), System.getenv("DB_PASSWORD"), 
+                System.getenv("DB_SERVICE"),
+                System.getenv("DB_DATABASE"));
+        LOG.log(Level.INFO, ">>> init() {0}", connectionString);
 //        client = new MongoClient("second-data", 27017);
-        client = new MongoClient(new MongoClientURI("mongodb://mauricio:maltron@microservice-data:27017/sampledb"));
+//        client = new MongoClient(new MongoClientURI("mongodb://mauricio:maltron@microservice-data:27017/people"));
+        client = new MongoClient(new MongoClientURI(connectionString));
         
         try {
             MongoCollection<Document> collection = client.getDatabase(DATABASE).getCollection(COLLECTION);
